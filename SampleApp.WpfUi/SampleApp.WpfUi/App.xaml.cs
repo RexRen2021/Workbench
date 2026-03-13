@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SampleApp.WpfUi.Helpers.App;
 using SampleApp.WpfUi.Helpers.Extensions;
 using SampleApp.WpfUi.Services;
 using SampleApp.WpfUi.ViewModels.Pages;
@@ -11,6 +10,7 @@ using SampleApp.WpfUi.Views.Windows;
 using Serilog;
 using System.Configuration;
 using System.Data;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 using Wpf.Ui;
@@ -79,8 +79,8 @@ public partial class App : Application
         builder.Services.AddSingleton<HomeViewModel>();
 
         // All other pages and view models
-        builder.Services.AddTransientFromNamespace("SampleApp.WpfUi.Views", AssemblyHelper.CurrentAsssembly);
-        builder.Services.AddTransientFromNamespace("SampleApp.WpfUi.ViewModels", AssemblyHelper.CurrentAsssembly);
+        builder.Services.AddTransientFromNamespace("SampleApp.WpfUi.Views", Assembly.GetEntryAssembly()!);
+        builder.Services.AddTransientFromNamespace("SampleApp.WpfUi.ViewModels", Assembly.GetEntryAssembly()!);
 
         _host = builder.Build();
         _logger= _host?.Services.GetRequiredService<ILogger<App>>();

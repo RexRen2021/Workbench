@@ -49,6 +49,7 @@ public partial class HomePage : INavigableView<HomeViewModel>, IActionBar
             Content = "测试用户消息",
             Width = 100,
             Margin = new Thickness(0, 0, 10, 0),
+            Command= ViewModel.AddCommand,
         };
 
         var exportButton = new Button

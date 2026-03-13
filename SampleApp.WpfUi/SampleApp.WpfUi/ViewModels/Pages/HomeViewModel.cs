@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
 using SampleApp.WpfUi.Core;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,10 @@ namespace SampleApp.WpfUi.ViewModels.Pages;
 public partial class HomeViewModel : ViewModelBase
 {
     private readonly ILogger<HomeViewModel> _logger;
+
+    [ObservableProperty]
+    private int _counter = 0;
+
     public HomeViewModel(ILogger<HomeViewModel> logger)
     {
         _logger= logger;
@@ -19,5 +25,13 @@ public partial class HomeViewModel : ViewModelBase
     {
         _logger.LogInformation("Navigated to HomeViewModel");
         return base.OnNavigatedToAsync();
+    }
+
+    [RelayCommand]
+    private Task AddAsync()
+    {
+        Interlocked.Increment(ref _counter);
+        OnPropertyChanged(nameof(Counter));
+        return Task.CompletedTask;
     }
 }
