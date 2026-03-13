@@ -1,0 +1,90 @@
+﻿<ui:FluentWindow x:Class="SampleApp.WpfUi.Views.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tray="http://schemas.lepo.co/wpfui/2022/xaml/tray"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:local="clr-namespace:SampleApp.WpfUi.Views.Windows"
+        Title="SampleApp.WpfUi"
+        Width="1450"
+        Height="802"
+        MinWidth="900"
+        d:DataContext="{d:DesignInstance local:MainWindow,
+                        IsDesignTimeCreatable=False}"
+        d:DesignHeight="650"
+        d:DesignWidth="1000"
+        ExtendsContentIntoTitleBar="True"
+        SizeChanged="MainWindow_OnSizeChanged"
+        WindowBackdropType="Mica"
+        WindowCornerPreference="Default"
+        WindowStartupLocation="CenterScreen"
+        Closing="MainWindow_Closing"
+        mc:Ignorable="d">
+    <Grid>
+        <ui:NavigationView
+            x:Name="NavigationView"
+            Padding="42,0,42,0"
+            BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
+            EnableDebugMessages="True"
+            FooterMenuItemsSource="{Binding NavigationFooter, Mode=OneWay}"
+            FrameMargin="0"
+            IsBackButtonVisible="Visible"
+            IsPaneToggleVisible="True"
+            MenuItemsSource="{Binding NavigationItems, Mode=OneWay}"
+            OpenPaneLength="310"
+            PaneClosed="NavigationView_OnPaneClosed"
+            PaneDisplayMode="Left"
+            PaneOpened="NavigationView_OnPaneOpened"
+            Navigated="NavigationView_Navigated"
+            TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}"
+            Transition="FadeInWithSlide">
+            <ui:NavigationView.Header>
+                <Grid Margin="42,32,42,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MinWidth="200"/>
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:BreadcrumbBar x:Name="BreadcrumbBar" Grid.Column="0"/>
+                    <ContentControl x:Name="PageActionBarHost" Grid.Column="1"
+                                      HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                </Grid>
+            </ui:NavigationView.Header>
+            <ui:NavigationView.ContentOverlay>
+                <Grid>
+                    <ui:SnackbarPresenter x:Name="SnackbarPresenter" />
+                </Grid>
+            </ui:NavigationView.ContentOverlay>
+        </ui:NavigationView>
+
+        <ui:TitleBar
+            x:Name="TitleBar"
+            Title="SampleApp.WpfUi"
+            Grid.Row="0"
+            CloseWindowByDoubleClickOnIcon="True">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
+            </ui:TitleBar.Icon>
+            <ui:TitleBar.TrailingContent>
+                <Menu>
+                    <ui:MenuItem Click="ViewLog_Click"
+                        Icon="{ui:SymbolIcon History24,False}" ToolTip="查看日志" FontSize="24"/>
+                    <Separator />
+                </Menu>
+            </ui:TitleBar.TrailingContent>
+        </ui:TitleBar>
+
+        <tray:NotifyIcon
+            Grid.Row="0"
+            FocusOnLeftClick="True"
+            Icon="pack://application:,,,/Assets/wpfui.png"
+            MenuOnRightClick="True"
+            TooltipText="SampleApp.WpfUi">
+            <tray:NotifyIcon.Menu>
+                <ContextMenu ItemsSource="{Binding TrayMenuItems, Mode=OneWay}" />
+            </tray:NotifyIcon.Menu>
+        </tray:NotifyIcon>
+
+        <ui:ContentDialogHost x:Name="RootContentDialog" Grid.Row="0" />
+    </Grid>
+</ui:FluentWindow>
