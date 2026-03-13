@@ -12,6 +12,7 @@ using Serilog;
 using System.Configuration;
 using System.Data;
 using System.Windows;
+using System.Windows.Threading;
 using Wpf.Ui;
 using Wpf.Ui.DependencyInjection;
 
@@ -27,6 +28,13 @@ public partial class App : Application
 
     public App()
     {
+        DispatcherUnhandledException += OnDispatcherUnhandledException;
+    }
+
+    private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+    {
+        _logger?.LogError(e.Exception, "An unhandled exception occurred.");
+        e.Handled = true;
     }
 
     protected override async void OnExit(ExitEventArgs e)
