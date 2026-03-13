@@ -30,8 +30,7 @@ public partial class HomeViewModel : ViewModelBase
     [RelayCommand]
     private Task AddAsync()
     {
-        Interlocked.Increment(ref _counter);
-        OnPropertyChanged(nameof(Counter));
+        Counter++;
         return Task.CompletedTask;
     }
 }
