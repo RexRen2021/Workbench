@@ -6,6 +6,7 @@
       xmlns:vm="clr-namespace:SampleApp.WpfUi.ViewModels.Pages"
       xmlns:local="clr-namespace:SampleApp.WpfUi.Views.Pages"
       mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance local:HomePage, IsDesignTimeCreatable=False}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomePage">
 
