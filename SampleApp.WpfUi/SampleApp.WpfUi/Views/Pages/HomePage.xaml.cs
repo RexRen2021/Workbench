@@ -52,6 +52,16 @@ public partial class HomePage : INavigableView<HomeViewModel>, IActionBar
             Command= ViewModel.AddCommand,
         };
 
+        var doingButton = new Button
+        {
+            Appearance = ControlAppearance.Secondary,
+            Icon = new SymbolIcon { Symbol = SymbolRegular.Add24 },
+            Content = "Doing",
+            Width = 100,
+            Margin = new Thickness(0, 0, 10, 0),
+            Command = ViewModel.DoingCommand,
+        };
+
         var exportButton = new Button
         {
             Content = "导出",
@@ -59,6 +69,7 @@ public partial class HomePage : INavigableView<HomeViewModel>, IActionBar
         };
 
         stackPanel.Children.Add(addButton);
+        stackPanel.Children.Add(doingButton);
         stackPanel.Children.Add(exportButton);
 
         return stackPanel;

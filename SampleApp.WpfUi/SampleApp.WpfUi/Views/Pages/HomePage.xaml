@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:vm="clr-namespace:SampleApp.WpfUi.ViewModels.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:SampleApp.WpfUi.Views.Pages"
       mc:Ignorable="d" 
       d:DataContext="{d:DesignInstance local:HomePage, IsDesignTimeCreatable=False}"
@@ -13,6 +14,8 @@
     <Grid>
         <StackPanel>
             <TextBlock Text="{Binding ViewModel.Counter,Mode=OneWay}" FontSize="24" Margin="20"/>
+            <TextBlock Text="{Binding ViewModel.IsBusy,Mode=OneWay}" FontSize="24" Margin="20"/>
+            <ui:ToggleSwitch Content="Busy!" Margin="20" IsChecked="{Binding ViewModel.IsBusy}"/>
         </StackPanel>
     </Grid>
 </Page>

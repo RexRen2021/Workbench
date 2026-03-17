@@ -15,6 +15,9 @@ public partial class HomeViewModel : ViewModelBase
     [ObservableProperty]
     private int _counter = 0;
 
+    [ObservableProperty]
+    private Boolean _isBusy = false;
+
     public HomeViewModel(ILogger<HomeViewModel> logger)
     {
         _logger= logger;
@@ -32,5 +35,13 @@ public partial class HomeViewModel : ViewModelBase
     {
         Counter++;
         return Task.CompletedTask;
+    }
+
+    [RelayCommand]
+    private async Task DoingAsync()
+    {
+        IsBusy = true;
+        await Task.Delay(10000);
+        IsBusy = false;
     }
 }

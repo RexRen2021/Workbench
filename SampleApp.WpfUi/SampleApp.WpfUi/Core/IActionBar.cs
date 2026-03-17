@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 
-namespace SampleApp.WpfUi.Core
+namespace SampleApp.WpfUi.Core;
+
+public interface IActionBar
 {
-    public interface IActionBar
-    {
-        FrameworkElement ActionBar { get;}
-    }
+    FrameworkElement ActionBar { get;}
 }

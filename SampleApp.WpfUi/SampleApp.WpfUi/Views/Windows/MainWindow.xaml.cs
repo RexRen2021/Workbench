@@ -38,6 +38,8 @@ public partial class MainWindow
 
     private bool _isPaneOpenedOrClosedFromCode;
 
+    private object _currentPage;
+
     public List<object> NavigationItems { get; } =
         [
                 new NavigationViewItem()
@@ -93,6 +95,7 @@ public partial class MainWindow
     private readonly IConfiguration _configuration;
     private readonly ILogger<MainWindow>? _logger;
     private readonly IContentDialogService _contentDialogService;
+    private readonly INavigationService _navigationService;
 
     private bool shutdown = false;
 
@@ -117,6 +120,7 @@ public partial class MainWindow
         contentDialogService.SetDialogHost(RootContentDialog);
 
         _contentDialogService = contentDialogService;
+        _navigationService = navigationService;
 
         SetupTrayMenuEvents();
     }
@@ -155,7 +159,9 @@ public partial class MainWindow
 
     private void NavigationView_Navigated(NavigationView sender, NavigatedEventArgs args)
     {
-        if (args.Page is IActionBar actionBarPage)
+        _currentPage = args.Page;
+
+        if (_currentPage is IActionBar actionBarPage)
         {
             PageActionBarHost.Content = actionBarPage.ActionBar;
         }
@@ -163,7 +169,7 @@ public partial class MainWindow
         {
             PageActionBarHost.Content = null;
         }
-        _logger?.LogInformation($"Navigated to {args.Page.GetType().Name}");
+        _logger?.LogInformation($"Navigated to {_currentPage.GetType().Name}");
     }
 
     private async void ViewLog_Click(object sender, RoutedEventArgs e)
@@ -313,5 +319,10 @@ public partial class MainWindow
         {
             _logger?.LogError($"NavigateToPage {pageType.Name} Error: {ex.Message}");
         }
+    }
+
+    private void NavigationView_Navigating(NavigationView sender, Wpf.Ui.Controls.NavigatingCancelEventArgs args)
+    {
+        _logger?.LogInformation($"Navigating happens!Source Page:{_currentPage?.GetType().FullName??"No Page Selected!"}, Target Page:{args.Page.GetType().FullName}");
     }
 }

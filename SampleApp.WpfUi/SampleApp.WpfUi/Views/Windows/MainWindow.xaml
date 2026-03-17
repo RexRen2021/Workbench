@@ -36,6 +36,7 @@
             PaneClosed="NavigationView_OnPaneClosed"
             PaneDisplayMode="Left"
             PaneOpened="NavigationView_OnPaneOpened"
+            Navigating="NavigationView_Navigating"
             Navigated="NavigationView_Navigated"
             TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}"
             Transition="FadeInWithSlide">
