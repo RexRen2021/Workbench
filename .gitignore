@@ -52,6 +52,6 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
 /.vs
-/SampleApp.WpfUi/.vs/SampleApp.WpfUi.slnx
-/SampleApp.WpfUi/.vs/SampleApp.WpfUi/CopilotIndices/18.4.105.37992
+/SampleApp.WpfUi/.vs
