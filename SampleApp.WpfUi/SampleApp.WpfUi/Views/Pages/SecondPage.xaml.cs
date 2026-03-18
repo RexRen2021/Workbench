@@ -11,16 +11,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SampleApp.WpfUi.Views.Pages
+namespace SampleApp.WpfUi.Views.Pages;
+
+/// <summary>
+/// Interaction logic for SecondPage.xaml
+/// </summary>
+public partial class SecondPage : Page
 {
-    /// <summary>
-    /// Interaction logic for SecondPage.xaml
-    /// </summary>
-    public partial class SecondPage : Page
+    public SecondPage()
     {
-        public SecondPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

@@ -11,16 +11,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SampleApp.WpfUi.Views.Pages
+namespace SampleApp.WpfUi.Views.Pages;
+
+/// <summary>
+/// Interaction logic for SettingsPage.xaml
+/// </summary>
+public partial class SettingsPage : Page
 {
-    /// <summary>
-    /// Interaction logic for SettingsPage.xaml
-    /// </summary>
-    public partial class SettingsPage : Page
+    public SettingsPage()
     {
-        public SettingsPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
